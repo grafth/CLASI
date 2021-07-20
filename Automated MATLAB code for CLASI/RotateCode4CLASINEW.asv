@@ -93,7 +93,7 @@ startF=3; %because the files start at 3
 [Store_nci,Store_nciNoise,Store_coh,Store_cohNoise,Store_offset,Vel,range,time] = Processing_CLASI_2_Channel(PulseSelection,data_dir,ii);
         dirsave=[filenamesday(end).folder ,'/', filenamesday(end).date ,'/', 'SAVE'];
     cd(dirsave);
-    save([filenames(ii).name(3:21) '.mat'],'Store_nci','Store_nciNoise','Store_coh','Store_cohNoise','Store_offset','Vel','range','time');
+    save([filenames(ii).name(3:21) '.mat'],'Store_nci','Store_nciNoise','Store_coh','Store_cohNoise','Store_offset',Vel,'range','time');
     end
 % put the image code in the processing code so it can update every packtage
 % update

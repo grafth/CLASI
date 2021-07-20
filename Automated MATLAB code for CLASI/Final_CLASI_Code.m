@@ -5,7 +5,8 @@ deleteRawFile=1; %if 1 delete if 0 keep
 SaveAllFiles=1;  %if 1 delete if 0 keep
 
 %% inital dir setup
-addpath('C:\Users\casper_admin\Desktop\Automated MATLAB code for CLASI')
+%addpath('C:\Users\palmore.19\Desktop\Automated MATLAB code for CLASI')
+addpath('C:\Users\palmore.19\Documents\GitHub\CLASI\Automated MATLAB code for CLASI')
 data_dir = 'C:\Users\casper_admin\Desktop\KodenRadarControl';
 cd(data_dir);
 

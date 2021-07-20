@@ -5,8 +5,8 @@ deleteRawFile=1; %if 1 delete if 0 keep
 SaveAllFiles=1;  %if 1 delete if 0 keep
 
 %% inital dir setup
-addpath('C:\Users\palmore.19\Desktop\Automated MATLAB code for CLASI')
-
+%addpath('C:\Users\palmore.19\Desktop\Automated MATLAB code for CLASI')
+addpath('C:\Users\palmore.19\Documents\GitHub\CLASI\Automated MATLAB code for CLASI')
 
 
 data_dir = 'E:\CLASI_Save folder\R_2021.07.10'%'E:\June_23_test\R_2021.06.23' %'D:\CASPERWESTRadarData\NewTest\test\final\R_2021.06.04';

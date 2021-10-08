@@ -1,6 +1,6 @@
 %%
-FN=dir('F:\CLASI_Monterey\Radar_data_100521')%'F:\CLASI_Monterey\Radar_data_AUG27C')%('F:\CLASI_Monterey\Radar_data_AUG27CHECK2')%'F:\CLASI_Monterey\Radar_data_aug_17');%('F:\CLASI_Monterey\Radar_data_22_up');%('E:\CLASI_Save folder\SAVE')
-cd('F:\CLASI_Monterey\Radar_data_100521')%'F:\CLASI_Monterey\Radar_data_AUG27C')
+FN=dir('F:\CLASI_Monterey\Radar_data_AUG27Cw')%'F:\CLASI_Monterey\Radar_data_AUG27C')%('F:\CLASI_Monterey\Radar_data_AUG27CHECK2')%'F:\CLASI_Monterey\Radar_data_aug_17');%('F:\CLASI_Monterey\Radar_data_22_up');%('E:\CLASI_Save folder\SAVE')
+cd('F:\CLASI_Monterey\Radar_data_AUG27Cw')%'F:\CLASI_Monterey\Radar_data_AUG27C')
 for i=3:length(FN)%+49
 Mat(i-(2))=load(FN(i).name);
 end
@@ -10,26 +10,22 @@ for ii=1:length(FN)-2
    BBB(ii,:)=Mat(ii).Store_nci;
 end
 
-
 %%
+
 e=1;
-R=1%15*6
+R=1*6%15*6
 for q=1:length(FN)-2
 Q=mod(q,R);
 
 if Q==0
-    WWx(e)=mean(BB(q-(R-1):q));
+    %WWx(e)=mean(BB(q-(R-1):q));
      WW(e)=mean(mean(BBB(q-(R-1):q,8000:11000)));%,11000:end-500)));
-WWW(e,:)=mean(BBB(q-(R-1):q,:));
+%WWW(e,:)=mean(BBB(q-(R-1):q,:));
 e=e+1;
 else
     
 end
 end
-
-%%
-
-
 for ii=1:length(WW)
 %AwNoise(ii-2,:)=10*log10((Mat(ii).Store_nciNoise));
 % if ii<5
@@ -42,17 +38,43 @@ for ii=1:length(WW)
 % 
 % A(ii-2,:)=10*log10((Mat(ii).Store_nci-Nmean(ii-2)));
 % AA(ii-2,:)=10*log10((Mat(ii).Store_nci));
-
+uu=0;
+for u=1:6
 for p=1:15500
-    if(BBB(ii,p)-WW(ii))<0 %(Mat(ii).Store_nci(:,p)-Nmean(ii-2))<0
-        BBB(ii,p)= 1*WW(ii);
+    if(BBB(ii*uu + u,p)-WW(ii))<0 %(Mat(ii).Store_nci(:,p)-Nmean(ii-2))<0
+        BBB(ii*uu + u,p)= 1*WW(ii);
         %q=q+1;
     else
     end
+    BBBB(ii*uu + u,:)=BBB(ii*uu + u, :)-WW(ii);
 end
-AAAAA(ii,:)=10*log10(BBB(ii,:))+30;
-AAA(ii,:)=10*log10(BBB(ii,:))-WW(ii));
+
+uu=uu+1;
 end
+if uu>1
+BBBBB(ii,:)=mean(BBBB(ii*uu-1:ii*uu ,:));
+else 
+end
+end
+AAA(ii,:)=10*log10(BBBBB); 
+
+
+%%
+e=1;
+R=1*6%15*6
+for q=1:length(FN)-2
+Q=mod(q,R);
+
+if Q==0
+    WWx(e)=mean(BB(q-(R-1):q));
+     WW(e)=mean(mean(BBB(q-(R-1):q,8000:11000)));%,11000:end-500)));
+WWW(e,:)=mean(BBB(q-(R-1):q,:));
+e=e+1;
+else
+   
+end
+end
+
 
 figure
 imagesc(Mat(3).range/1e3,1:size(AAA,1),AAA+30)
@@ -85,21 +107,21 @@ end
 figure
 for iii=1:500%1:19;%134:154%1:length(FN)-2%186 %length(FN)-1
 %      I=find(10*log10(BBB(iii,:))+30>-2,1);
-%      AAA(iii,:)=circshift(AAA(iii,:),-I);
+%      BBB(iii,:)=circshift(BBB(iii,:),-I);
 %    plot(Mat(3).range/1e3,10*log10(BBB(iii,:))+30)
    plot(Mat(3).range/1e3,AAA(iii,:)+30)
    %plot(AAA(iii,:)+30)
    %plot(Mat(1).range/1e3,AAA(iii,:)+30)
    %plot(Mat(3).range/1e3,A(iii,:)+30)
    hold on
-   xlim([0 70])
-   pause(0.3);
+   xlim([0 20])
+   pause(1);
    grid on
 end
 %%
 % 
 % for iii=3:length(Mat)
-% Binny2(iii8)=Mat(iii).Store_nci(abs(range-1400)==min(abs(range-1400)));
+% Binny2(iii)=Mat(iii).Store_nci(abs(range-1400)==min(abs(range-1400)));
 % Binny3(iii)=Mat(iii).Store_nci(abs(range-1500)==min(abs(range-1500)));
 % Binny4(iii)=Mat(iii).Store_nci(abs(range-1600)==min(abs(range-1600)));
 % Binny5(iii)=Mat(iii).Store_nci(abs(range-1700)==min(abs(range-1700)));

@@ -38,10 +38,9 @@ if PulseSelection=="long";
     pulseTossinc=4;
     StartNoiseIndex=1;                  % To start the noise averageing bins for voltage bias
 if BiasAvg=="long"
-    EndNoiseIndex=30;                  % To end the noise averageing bins for voltage bias
+    EndNoiseIndex=30;%14;                   % To end the noise averageing bins for voltage bias
 else 
-    EndNoiseIndex=14;  
-end
+    
 else PulseSelection=="short";
     decimation_factor = 1;          % Data collected at 100 MHz
     Fs = 100e6;                      % Sample Frequency (Hz)
@@ -63,11 +62,7 @@ else PulseSelection=="short";
     PulseFrontTailB=PulseFrontTail+10; %# 
     pulseTossinc=20;     %#
     StartNoiseIndex=1;                  % To start the noise averageing bins for voltage bias
-if BiasAvg=="long"
-    EndNoiseIndex=170;%50?;                   % To end the noise averageing bins for voltage bias
-else 
-    EndNoiseIndex=50;%DEG need to fix  
-end
+EndNoiseIndex=170;%50?;                   % To end the noise averageing bins for voltage bias
 end
 %signalEnd = 16000;
 
